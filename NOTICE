@@ -1,0 +1,130 @@
+privden
+Copyright (c) 2026 privden team
+
+This product bundles third-party software and data files. Their licenses and
+required attributions are recorded below. The data-file sections must be kept in
+sync with the corresponding asset headers under service-wrapper/assets/.
+
+Attribution for the Rust crates linked into privden.exe and tuwunel.exe is
+generated from the dependency trees and shipped separately as
+THIRD-PARTY-NOTICES.md. This file covers the bundled server and the data files
+only.
+
+-------------------------------------------------------------------------------
+Tuwunel Matrix homeserver  --  MODIFIED BY privden
+-------------------------------------------------------------------------------
+Bundled as: tuwunel.exe (the Matrix homeserver privden installs and supervises).
+
+    https://github.com/matrix-construct/tuwunel
+    https://tuwunel.chat
+
+Copyright 2023 June
+Authored by the Tuwunel, Conduwuit, and Conduit contributors:
+
+    Timo Kösters <timo@koesters.xyz>
+    June Clementine Strawberry <june@girlboss.ceo>
+    Jason Volk <jason@zemos.net>
+    Conduit Contributors
+    Conduwuit Contributors
+    Tuwunel Contributors
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+these files except in compliance with the License. You may obtain a copy of the
+License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the
+specific language governing permissions and limitations under the License.
+
+The full license text is reproduced in THIRD-PARTY-NOTICES.md.
+
+NOTICE OF MODIFICATION (Apache License 2.0, section 4(b))
+---------------------------------------------------------
+privden does NOT ship stock Tuwunel. The tuwunel.exe distributed with privden is
+built from Tuwunel v1.8.0 with privden's Windows portability patches applied. The
+Tuwunel project is not responsible for, and did not produce, this modified build.
+
+The modifications port Tuwunel to x86_64-pc-windows-msvc. They gate unix-only
+system calls behind #[cfg(unix)], add non-unix fallbacks, fix a non-unix Ctrl+C
+handler that never shut the server down, and set Windows-specific build flags.
+They do not alter the Matrix protocol behaviour, the federation logic, or the
+storage format.
+
+The following files are changed relative to upstream v1.8.0:
+
+    .cargo/config.toml
+    src/core/utils/sys/storage.rs
+    src/core/utils/sys/usage.rs
+    src/core/utils/sys/limits.rs
+    src/service/media/migrations.rs
+    src/macros/admin.rs
+    src/main/main.rs
+    src/main/signals.rs
+    src/router/serve.rs
+
+Every modification is kept as a reviewable unified diff under patches/ in the
+privden source tree; patches/README.md documents each one and the file it
+targets. No upstream file is modified by any other means.
+
+-------------------------------------------------------------------------------
+EFF Short Wordlist #1
+-------------------------------------------------------------------------------
+Used by: service-wrapper/assets/passphrase-wordlist.txt (passphrase generator).
+
+The passphrase wordlist is the EFF Short Wordlist #1, published by the
+Electronic Frontier Foundation:
+
+    https://www.eff.org/files/2016/09/08/eff_short_wordlist_1.txt
+    https://www.eff.org/dice
+
+Licensed under the Creative Commons Attribution 3.0 United States license
+(CC BY 3.0 US): https://creativecommons.org/licenses/by/3.0/us/
+
+Changes made to the original work (permitted under CC BY 3.0 with this notice):
+  - The leading dice-roll column and tab separator were removed, leaving one
+    bare word per line.
+  - The single hyphenated entry "yo-yo" was omitted because the hyphen is the
+    passphrase separator (1296 -> 1295 words).
+No words were added or otherwise altered.
+
+-------------------------------------------------------------------------------
+SecLists — xato.net "10-million" common-password corpus (top 10,000)
+-------------------------------------------------------------------------------
+Used by: service-wrapper/assets/common-passwords.txt (common-password blocklist).
+
+The common-password blocklist is the top 10,000 entries of the xato.net
+"10-million" password corpus compiled by Mark Burnett, as packaged in SecLists:
+
+    https://github.com/danielmiessler/SecLists
+    Passwords/Common-Credentials/xato-net-10-million-passwords-10000.txt
+
+SecLists is distributed under the MIT License:
+
+    MIT License
+
+    Copyright (c) 2012-2025 Daniel Miessler
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+Change made to the original file: one blank line was removed. The individual
+passwords are factual records of leaked strings and are not themselves
+copyrightable; the MIT notice above covers the compilation.
