@@ -7,7 +7,7 @@ builds and were never published — see [Before 0.1.3](#before-013) if you have 
 
 ---
 
-## [0.1.3] — unreleased
+## [0.1.3] — 2026-07-23
 
 The first public release. A private Matrix chat server for a Windows PC, for use inside your
 own network.
