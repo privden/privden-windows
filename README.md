@@ -89,12 +89,17 @@ The first time you run privden it asks you to choose a short name and confirm an
 address. A code arrives by email, you type it back, and `yourname.privden.chat` becomes
 **your server's name, reserved for you**. It costs nothing and it is not a subscription.
 
-Two honest points about it:
+Three honest points about it:
 
-- **This step needs the internet**, and it is the one thing in privden that does. A name has to
-  be reserved somewhere for it to be yours rather than anyone else's. If privden cannot reach
-  us while you are setting up, it says so and offers to try again — the server does not start
-  without its name.
+- **This step needs the internet.** A name has to be reserved somewhere for it to be yours
+  rather than anyone else's. If privden cannot reach us while you are setting up, it says so and
+  offers to try again — the server does not start without its name.
+- **After that, privden checks in about once a day** to say the name is still in use. The
+  request carries two things — the token that identifies your reservation, and privden's version
+  number. No messages, nothing about them, nothing about the accounts on your server. If it
+  cannot get through, nothing breaks: a name is only released after a very long silence, and you
+  get an email about it first. Your chatting never touches the internet at all — it happens
+  inside your own network.
 - **The name does not make your server reachable from the internet.** Not today. Inside your
   own network you still connect by IP address, exactly as described below. The name is what
   **privden Connect** will use to reach your server from outside, by name, over TLS, when that

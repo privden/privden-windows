@@ -36,7 +36,7 @@ exist because each was made to check one thing on a real machine before the next
 
 - **A name you already reserved can be restored on a new install.** Confirm the same email
   address and privden offers the name back instead of asking you to pick another one. There is
-  a link on the name screen — *I already have a name* — for going straight there.
+  a link on the name screen — *I already have a privden name* — for going straight there.
 - Restoring is about the **name**, not your messages: a reinstall that deleted your data does
   not bring the data back, and privden says so plainly before you confirm.
 - Uninstalling privden does **not** release your name. That is deliberate — the name stays
@@ -141,9 +141,9 @@ exist because each was made to check one thing on a real machine before the next
 
 - **A damaged settings file could copy its own contents into privden's log.** When the settings
   file failed to parse, the error carried the offending line verbatim — and that line can be
-  the server's registration secret. The log now records the position and the reason and says
-  the line was left out on purpose. The log is append-only and lives on your PC, so anything
-  written there stays there.
+  the server's registration secret. The log now records the position and the reason, and says
+  the line was left out on purpose. privden's log stays on your PC and is never sent anywhere —
+  which is exactly why what goes into it matters.
 
 **The tray menu**
 
@@ -160,11 +160,10 @@ exist because each was made to check one thing on a real machine before the next
   is something a **fresh install** gets; an upgraded install carries on exactly as it did.
 - **What has and has not been tested.** Upgrades were run repeatedly between the internal
   builds of this release, on a real machine, including the case where the running privden has
-  to be stopped first. The particular step **from 0.1.3 to 0.4.0** was not walked end to end —
-  0.1.3 was published but never actually installed by anyone outside the project, so the
-  scenario has no one in it. If you are the exception and something looks wrong after
-  upgrading, your data is still in `%LOCALAPPDATA%\privden`: uninstalling and installing again
-  does not remove it.
+  to be stopped first. The particular step **from 0.1.3 to 0.4.0** was not walked end to end.
+  If you are holding 0.1.3 and something looks wrong after upgrading, your data is still in
+  `%LOCALAPPDATA%\privden` — uninstalling and installing again does not remove it, and an
+  issue here is worth opening.
 
 ### Unchanged since 0.1.3
 
@@ -175,9 +174,10 @@ exist because each was made to check one thing on a real machine before the next
 - One item on that list is now settled: **iPhone works.** Element X on iOS connects to the
   server by local IP address just as Android and desktop clients do. The 0.1.3 notes listed
   iOS as untested; it has since been tested and it works.
-- **Still not code-signed.** Windows SmartScreen warns when the installer runs. Verify the
-  published SHA-256 before running it. The certificate is being obtained; it is a matter of
-  paperwork rather than software.
+- **Still not code-signed.** Windows SmartScreen warns when the installer runs — the warning is
+  accurate, and verifying the published SHA-256 is what stands in for a signature meanwhile.
+  Work on a certificate continues; it is a slower path than we would like and we are not going
+  to attach a date to it.
 
 ---
 
