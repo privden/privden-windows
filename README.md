@@ -26,7 +26,8 @@ A free Windows app that turns your PC into a private chat server, compatible wit
 | **OS** | Windows 10 or 11, 64-bit |
 | **Rights** | Administrator (the installer writes to `Program Files` and registers the app) |
 | **Disk** | ~200 MB for the program, plus your messages and files |
-| **Network** | A home network. See [How you connect](#how-you-connect) — the first release is for use inside your own network |
+| **Network** | A home network — privden serves inside it, see [How you connect](#how-you-connect) |
+| **At first run** | **An internet connection and an email address**, once, to reserve your server's name — see [Your server's name](#your-servers-name) |
 
 macOS is planned; there is no macOS build yet.
 
@@ -68,6 +69,8 @@ Matrix app; the messages live on your machine rather than on somebody else's ser
 - Sending and receiving files
 - End-to-end encryption on every conversation
 - Several accounts on one server, created from the tray app
+- A permanent name for your server, reserved for you — see below
+- The PC no longer falls asleep while the server is running
 - Works with any Matrix client — Element, Element X, FluffyChat, SchildiChat and others
 - Installer and app in **English, French, Spanish, Russian and Hungarian**
 
@@ -80,11 +83,33 @@ Matrix app; the messages live on your machine rather than on somebody else's ser
 
 We would rather ship a small thing that works than a long list that half-works.
 
+### Your server's name
+
+The first time you run privden it asks you to choose a short name and confirm an email
+address. A code arrives by email, you type it back, and `yourname.privden.chat` becomes
+**your server's name, reserved for you**. It costs nothing and it is not a subscription.
+
+Two honest points about it:
+
+- **This step needs the internet**, and it is the one thing in privden that does. A name has to
+  be reserved somewhere for it to be yours rather than anyone else's. If privden cannot reach
+  us while you are setting up, it says so and offers to try again — the server does not start
+  without its name.
+- **The name does not make your server reachable from the internet.** Not today. Inside your
+  own network you still connect by IP address, exactly as described below. The name is what
+  **privden Connect** will use to reach your server from outside, by name, over TLS, when that
+  is built — reserving it now means it is waiting for you and nobody else has taken it.
+
+If you ever reinstall privden or move to another PC, confirm the same email address and the
+same name comes back to you — there is an *I already have a privden name* link on the first
+screen for exactly that. Uninstalling privden does not release your name.
+
 ### How you connect
 
 Your apps reach the server by typing the **IP address** of the PC it runs on, for example
-`http://192.168.1.50:8008` — the port is set during installation and `8008` is only the
-default. Your PC's address on your own network; nothing is exposed to the internet.
+`http://192.168.1.50:8008` — `8008` is the default port, and you can change it under
+**Advanced** on the first-run screen. Your PC's address on your own network; nothing is
+exposed to the internet.
 
 Two things to know, plainly:
 
@@ -99,6 +124,16 @@ Two things to know, plainly:
 Reaching your server from outside the house, by name, over TLS is what **privden Connect** is
 being built to do. It is not part of this release and is not sold yet — see
 [privden.com](https://privden.com).
+
+### When privden is running
+
+> **privden works while the computer is on and you are logged in.** After a restart, someone
+> has to log in to the computer before privden starts serving again. privden is meant for a
+> computer that stays plugged in — it is not designed to run on battery.
+
+While the server is running, privden keeps the PC from going to sleep — but only when it is on
+mains power. If you want a plugged-in machine to sleep tonight, stop the server from the
+privden menu; there is no setting to hunt for and nothing to switch back afterwards.
 
 ### Where things go
 
