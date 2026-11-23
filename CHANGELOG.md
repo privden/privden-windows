@@ -7,6 +7,55 @@ builds and were never published — see [Before 0.1.3](#before-013) if you have 
 
 ---
 
+## [0.16.1] — 2026-11-23
+
+The first signed release, and the first published since 0.4.0. Versions 0.4.1 to 0.16.0 were
+internal builds and were never published; their work is part of this release.
+
+### Signed by Privden LLC
+
+- **The installer and every program it installs are signed.** Windows names Privden LLC when it asks
+  for permission to install. On Windows 11 with Smart App Control switched on, an unsigned privden
+  could be blocked when the server started; the signed one runs.
+
+### The server runs without anyone signed in
+
+- **The server is a Windows service now.** It starts with the computer and comes back by itself
+  after a restart; nobody has to sign in first.
+- **Your data lives in `C:\ProgramData\privden`**, a folder that belongs to the computer rather than
+  to one Windows account.
+
+### Backups, and moving to another computer
+
+- **Make a backup…** writes an encrypted copy of your server — accounts, rooms, messages and files —
+  to a folder or a USB stick. **Restore a backup…** brings one back.
+- **Move to another computer…** makes the backup for the move and stops the server on the old
+  computer. On the new one, privden's first run sets up from that backup, under the same name, with
+  the history there.
+
+### People and passwords
+
+- **Manage people…** opens a page for the people on your server: add someone with a password, or
+  send them a link to choose their own.
+- **Password guessing is limited for each account**, and the last administrator can no longer be
+  switched off.
+
+### When the disk fills up
+
+- privden warns you when the disk runs low, and stops the server before the disk is full rather
+  than let it fail; it starts again by itself once there is room. It can also move your data to
+  another disk inside the computer.
+
+### Updated server core
+
+- **The bundled Tuwunel server moves from v1.8.2 to v2.0.0.**
+
+### Upgrading
+
+- **Installing over 0.1.3 or 0.4.0 has not been tested.**
+
+---
+
 ## [0.4.0] — 2026-08-09
 
 Your privden server now reserves a permanent name of its own, setup asks fewer questions, the
@@ -244,5 +293,6 @@ anyone holding an internal build does not discover it the hard way.
 
 ---
 
+[0.16.1]: https://github.com/privden/privden-windows/releases/tag/v0.16.1
 [0.4.0]: https://github.com/privden/privden-windows/releases/tag/v0.4.0
 [0.1.3]: https://github.com/privden/privden-windows/releases/tag/v0.1.3

@@ -44,26 +44,24 @@ The full license text is reproduced in THIRD-PARTY-NOTICES.md.
 NOTICE OF MODIFICATION (Apache License 2.0, section 4(b))
 ---------------------------------------------------------
 privden does NOT ship stock Tuwunel. The tuwunel.exe distributed with privden is
-built from Tuwunel v1.8.0 with privden's Windows portability patches applied. The
-Tuwunel project is not responsible for, and did not produce, this modified build.
+built from Tuwunel v2.0.0 with privden's patches applied. The Tuwunel project is
+not responsible for, and did not produce, this modified build.
 
-The modifications port Tuwunel to x86_64-pc-windows-msvc. They gate unix-only
-system calls behind #[cfg(unix)], add non-unix fallbacks, fix a non-unix Ctrl+C
-handler that never shut the server down, and set Windows-specific build flags.
-They do not alter the Matrix protocol behaviour, the federation logic, or the
-storage format.
+The patches set build flags for privden's Windows build machine, box one stream
+in the integrity checks so that the server links on macOS, and add an
+administrator command that clears an account's one-time keys, which privden runs
+after a server is restored from a backup. They do not alter the Matrix protocol
+behaviour, the federation logic, or the storage format.
 
-The following files are changed relative to upstream v1.8.0:
+The following files are changed or added relative to upstream v2.0.0:
 
     .cargo/config.toml
-    src/core/utils/sys/storage.rs
-    src/core/utils/sys/usage.rs
-    src/core/utils/sys/limits.rs
-    src/service/media/migrations.rs
-    src/macros/admin.rs
-    src/main/main.rs
-    src/main/signals.rs
-    src/router/serve.rs
+    docs/backups.md
+    src/admin/user/clear_one_time_keys.rs
+    src/admin/user/mod.rs
+    src/service/integrity/redactions.rs
+    src/service/users/keys.rs
+    src/service/users/tests.rs
 
 Every modification is kept as a reviewable unified diff under patches/ in the
 privden source tree; patches/README.md documents each one and the file it

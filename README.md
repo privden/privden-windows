@@ -2,218 +2,134 @@
 
 **Your den. Your rules.**
 
-A free Windows app that turns your PC into a private chat server, compatible with
-[Matrix](https://matrix.org/). Your messages, your data, your control.
+A Windows app that turns your PC into a private chat server, compatible with
+[Matrix](https://matrix.org/). Your conversations and files stay on your computer.
 
 *[Читать по-русски](README.ru.md)*
 
 > **This repository holds releases, not source code.** privden is proprietary software; the
-> download below is the product. See [Source code](#source-code) for what is and isn't open,
-> and why.
+> download below is the product. See [Source code](#source-code) for what is open and what is not.
 
 ---
 
 ## Download
 
-**[Latest release →](https://github.com/privden/privden-windows/releases/latest)**
+**[privden for Windows — the latest release →](https://github.com/privden/privden-windows/releases/latest)**
 
-`privden-setup.exe` — a single installer, about a minute to run.
+`privden-setup.exe` — one installer, about a minute to run.
+
+Plans and prices: **[privden.com/pricing](https://privden.com/pricing/)**.
+How to use it: **[the documentation](https://privden-wiki.vercel.app/)**.
 
 ### Requirements
 
 | | |
 |---|---|
-| **OS** | Windows 10 or 11, 64-bit |
-| **Rights** | Administrator (the installer writes to `Program Files` and registers the app) |
-| **Disk** | ~200 MB for the program, plus your messages and files |
-| **Network** | A home network — privden serves inside it, see [How you connect](#how-you-connect) |
-| **At first run** | **An internet connection and an email address**, once, to reserve your server's name — see [Your server's name](#your-servers-name) |
+| **System** | Windows 10 or 11, 64-bit |
+| **Rights** | An administrator account, to install |
+| **Disk** | About 200 MB for the program, plus your messages and files |
+| **First run** | An internet connection and an email address, once, to reserve your server's name |
 
-macOS is planned; there is no macOS build yet.
+**A work computer may not let privden work.** Computers managed by an employer — with company
+security software, a company VPN or device management — often stop other devices from reaching a
+server on them, and quietly. If your computer belongs to your employer, use a personal one.
 
-### Verify your download
+There is no macOS or Linux download yet.
 
-Every release publishes the SHA-256 of `privden-setup.exe` in its release notes. In
-PowerShell:
+### Signed by Privden LLC
+
+The installer and every program it installs are signed by **Privden LLC**. Windows shows that name
+when it asks for permission to install, and the signature is what lets privden run where Windows
+11's Smart App Control is switched on.
+
+### Check your download
+
+Every release publishes the SHA-256 of `privden-setup.exe` in its notes. In PowerShell:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 .\privden-setup.exe
 ```
 
-Compare the output with the hash in the release notes. If they differ, do not run the file.
-
-**This matters more than usual right now**, because privden is not yet code-signed — see
-below.
-
-### Windows will warn you
-
-privden is not code-signed yet, so Windows SmartScreen will show **"Windows protected your
-PC"** when you run the installer. That warning is accurate: it means Windows cannot confirm
-who published this file. Check the SHA-256 first, then choose **More info → Run anyway** if
-you decide to proceed.
-
-Code signing is in progress. Once it lands, this warning goes away and the publisher name
-appears in the elevation prompt instead. The SHA-256 will keep being published either way.
+If the two differ, do not run the file.
 
 ---
 
 ## What privden does
 
-You install it on a PC at home. That PC becomes a Matrix chat server for your household —
-your partner, your kids, your flatmates, a small team. Everyone chats through their normal
-Matrix app; the messages live on your machine rather than on somebody else's service.
+You install privden on a computer at home or in the office. That computer becomes a private chat
+server for the people you invite. They chat with ordinary Matrix apps — Element X, FluffyChat,
+Element and others — and the conversations and files stay on your computer rather than on somebody
+else's service. Messages are end-to-end encrypted by default.
 
-**Working today:**
+The server runs as a Windows service, so it comes back by itself after a restart, before anyone
+signs in. privden is meant for a computer that stays plugged in: while the server runs, it keeps
+such a computer from falling asleep, and on battery it does not. The privden menu adds people,
+makes and restores backups, and moves privden to another computer.
 
-- Direct messages and small group rooms
-- Sending and receiving files
-- End-to-end encryption on every conversation
-- Several accounts on one server, created from the tray app
-- A permanent name for your server, reserved for you — see below
-- The PC no longer falls asleep while the server is running
-- Works with any Matrix client — Element, Element X, FluffyChat, SchildiChat and others
-- Installer and app in **English, French, Spanish, Russian and Hungarian**
-
-**Not in this release:**
-
-- **Access from outside your network.** See below — this is the honest part.
-- Voice and video calls
-- Federation with other Matrix servers
-- Bridges to WhatsApp, Telegram and similar
-
-We would rather ship a small thing that works than a long list that half-works.
-
-### Your server's name
-
-The first time you run privden it asks you to choose a short name and confirm an email
-address. A code arrives by email, you type it back, and `yourname.privden.chat` becomes
-**your server's name, reserved for you**. It costs nothing and it is not a subscription.
-
-Three honest points about it:
-
-- **This step needs the internet.** A name has to be reserved somewhere for it to be yours
-  rather than anyone else's. If privden cannot reach us while you are setting up, it says so and
-  offers to try again — the server does not start without its name.
-- **After that, privden checks in about once a day** to say the name is still in use. The
-  request carries two things — the token that identifies your reservation, and privden's version
-  number. No messages, nothing about them, nothing about the accounts on your server. If it
-  cannot get through, nothing breaks: a name is only released after a very long silence, and you
-  get an email about it first. Your chatting never touches the internet at all — it happens
-  inside your own network.
-- **The name does not make your server reachable from the internet.** Not today. Inside your
-  own network you still connect by IP address, exactly as described below. The name is what
-  **privden Connect** will use to reach your server from outside, by name, over TLS, when that
-  is built — reserving it now means it is waiting for you and nobody else has taken it.
-
-If you ever reinstall privden or move to another PC, confirm the same email address and the
-same name comes back to you — there is an *I already have a privden name* link on the first
-screen for exactly that. Uninstalling privden does not release your name.
-
-### How you connect
-
-Your apps reach the server by typing the **IP address** of the PC it runs on, for example
-`http://192.168.1.50:8008` — `8008` is the default port, and you can change it under
-**Advanced** on the first-run screen. Your PC's address on your own network; nothing is
-exposed to the internet.
-
-Two things to know, plainly:
-
-- **That connection is not itself encrypted.** Your *messages* are, by Matrix end-to-end
-  encryption — but the link between app and server is plain HTTP inside your own network.
-  Anyone already on your network could see traffic metadata. Transport encryption is part of
-  the planned paid service, not of this release.
-- **Type the IP address, not a domain name.** Modern Matrix clients treat a domain name as an
-  instruction to go looking for the server over HTTPS on port 443, which this release does not
-  serve. An IP address skips that and connects directly.
-
-Reaching your server from outside the house, by name, over TLS is what **privden Connect** is
-being built to do. It is not part of this release and is not sold yet — see
-[privden.com](https://privden.com).
-
-### When privden is running
-
-> **privden works while the computer is on and you are logged in.** After a restart, someone
-> has to log in to the computer before privden starts serving again. privden is meant for a
-> computer that stays plugged in — it is not designed to run on battery.
-
-While the server is running, privden keeps the PC from going to sleep — but only when it is on
-mains power. If you want a plugged-in machine to sleep tonight, stop the server from the
-privden menu; there is no setting to hunt for and nothing to switch back afterwards.
+privden speaks English, French, Spanish, Russian and Hungarian.
 
 ### Where things go
 
 | What | Where |
 |---|---|
-| Program files | `C:\Program Files\privden` |
-| Your messages, accounts, config, logs | `%LOCALAPPDATA%\privden` |
+| The program | `C:\Program Files\privden` |
+| Your messages, accounts, settings and logs | `C:\ProgramData\privden` |
 
-Uninstalling removes the program. Your data directory is yours — check it before deleting
-anything.
+Uninstalling removes the program, and asks before it touches your data.
 
 ---
 
 ## Source code
 
-**The source is private and stays that way.** No fork, no pull requests. That is a deliberate
-choice, and it is worth being straight about what it does and doesn't mean:
+**The source is private and stays that way.** No fork, no pull requests. What that does and does not
+mean:
 
-- **What's closed:** the installer, the tray application, the first-run setup, the
-  translations. Product work, with no bearing on whether your messages are secret.
-- **What's open, and isn't ours:** the [Matrix protocol](https://spec.matrix.org/), its
-  end-to-end encryption, and the [Tuwunel](https://github.com/matrix-construct/tuwunel)
-  homeserver that privden packages and runs (Apache-2.0). Anyone wanting to audit the
-  cryptography audits it upstream, where it is public and reviewed.
-- **Where closing it genuinely costs you something:** `privden.exe` creates your accounts and
-  handles your password, so it sits in the trust path for *credentials* even though not for
-  message encryption. "Read the code" is not an answer we can offer. Code signing and the
-  published SHA-256 are what we offer instead.
-
-The reason is capacity, not revenue. A public repository is a standing promise to triage
-issues and review contributions, and an abandoned one damages trust more than an absent one.
+- **What is closed:** the installer, the privden app, the setup, the translations. Product work,
+  with no bearing on whether your messages are secret.
+- **What is open, and is not ours:** the [Matrix protocol](https://spec.matrix.org/), its end-to-end
+  encryption, and the [Tuwunel](https://github.com/matrix-construct/tuwunel) server that privden
+  runs (Apache-2.0). Anyone who wants to audit the cryptography audits it there, where it is public.
+- **Where closed source costs you something:** `privden.exe` creates your accounts and handles your
+  password, so it is trusted with *credentials*, though not with message encryption. "Read the
+  code" is not an answer we can offer; the signature and the published SHA-256 are.
 
 ---
 
 ## Bugs and questions
 
-[Issues](https://github.com/privden/privden-windows/issues) are open. Bug reports and
-questions about using privden are welcome here.
+[Issues](https://github.com/privden/privden-windows/issues) are open, for bug reports and questions
+about using privden. A useful report says your Windows version, the privden version (in
+**Settings**), what you did, and what happened. Logs are in `C:\ProgramData\privden\logs`.
 
-A useful report includes your Windows version, the privden version (tray menu → About), what
-you did, and what happened. Logs live in `%LOCALAPPDATA%\privden\logs`.
-
-> **One caveat on logs:** while the tray app is running, Windows Explorer and `dir` report a
-> stale size and timestamp for `privden.log`. Open the file and read it — do not judge it by
-> the size column.
-
-Feature requests are read but not promised. Because the source is closed, issues about the
-code itself cannot be acted on publicly.
+Feature requests are read but not promised. Because the source is closed, issues about the code
+itself cannot be acted on publicly.
 
 ---
 
 ## Licence
 
-privden is proprietary software, covered by the End User Licence Agreement in
-[LICENSE](LICENSE). The installer shows it before installing and copies it to the install
-directory as `LICENSE.txt`.
+privden is proprietary software, covered by the End User Licence Agreement in [LICENSE](LICENSE).
+The installer shows it before installing and copies it to the install directory as `LICENSE.txt`.
 
-The third-party components shipped inside it are **not** covered by that agreement and stay
-under their own licences:
+The third-party components inside it are **not** covered by that agreement and keep their own
+licences:
 
 | Component | Licence | Attribution |
 |---|---|---|
-| Tuwunel homeserver (`tuwunel.exe`) | Apache-2.0 | [NOTICE](NOTICE) |
+| Tuwunel server (`tuwunel.exe`) | Apache-2.0 | [NOTICE](NOTICE) |
 | Bundled data files (EFF wordlist, password blocklist) | CC BY 3.0 US / MIT | [NOTICE](NOTICE) |
-| Rust crates linked into both binaries | mixed | `THIRD-PARTY-NOTICES.md`, attached to each release |
+| Rust crates built into the programs | mixed | `THIRD-PARTY-NOTICES.md`, attached to each release |
 
-`THIRD-PARTY-NOTICES.md` is generated per build and attached to the release it belongs to,
-rather than tracked here, so it can never describe a different build than the one you
-downloaded. It is also installed alongside the program.
+`THIRD-PARTY-NOTICES.md` is generated for each build and attached to the release it belongs to, so
+it always describes the build you downloaded. It is also installed with the program.
 
 ---
 
 ## Links
 
-- [privden.com](https://privden.com) — what privden is, where it's going
+- [privden.com](https://privden.com) — what privden is
+- [Plans and prices](https://privden.com/pricing/)
+- [Documentation](https://privden-wiki.vercel.app/)
 - [CHANGELOG.md](CHANGELOG.md) — what changed, release by release
 - [Matrix](https://matrix.org/) — the open protocol privden speaks
-- [Tuwunel](https://github.com/matrix-construct/tuwunel) — the homeserver privden packages
+- [Tuwunel](https://github.com/matrix-construct/tuwunel) — the server privden runs
