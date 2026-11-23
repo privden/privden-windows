@@ -52,6 +52,10 @@ Get-FileHash -Algorithm SHA256 .\privden-setup.exe
 
 If the two differ, do not run the file.
 
+**Your browser may warn that `privden-setup.exe` isn't commonly downloaded.** The file is new: the
+warning is about how few people have downloaded it so far, not about what is in it. Check the
+SHA-256, then choose to keep the file.
+
 ---
 
 ## What privden does
